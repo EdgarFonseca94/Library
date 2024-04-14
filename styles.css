@@ -1,0 +1,27 @@
+#bookcase-container {
+    background-color: burlywood;
+    height: 80vh;
+    width: 80vw;
+    margin: auto;
+    position: relative;
+    max-width: 600px;
+    min-height: 550px;
+    max-height: 1000px;
+}
+#flex-shelves {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+    width: 90%;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+}
+.shelf {
+    background-color: #80461B;
+    height: 30%;
+}
