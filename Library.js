@@ -14,3 +14,10 @@ function addBookToLibrary(newBook) {
 function displayBooks() {
     myLibrary.forEach(e => console.log(e));
 }
+
+const dialog = document.querySelector('dialog');
+const showDialogBtn = document.querySelector('#newBtn');
+
+showDialogBtn.addEventListener("click", () => {
+    dialog.showModal();
+});

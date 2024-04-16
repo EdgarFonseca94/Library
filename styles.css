@@ -25,3 +25,6 @@
     background-color: #80461B;
     height: 30%;
 }
+::backdrop {
+    background-color: teal;
+}
