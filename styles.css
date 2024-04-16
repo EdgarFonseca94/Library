@@ -25,6 +25,14 @@
     background-color: #80461B;
     height: 30%;
 }
+dialog {
+    width: 300px;
+    height: 300px;
+}
 ::backdrop {
-    background-color: teal;
+    background-color: black;
+    opacity: .3;
+}
+.form-input {
+    margin-top: 10px;
 }
