@@ -9,13 +9,9 @@
     <title >Library</title>
 </head>
 <body>
-    <div id="bookcase-container">
-        <div id="flex-shelves">
-            <div class="shelf"></div>
-            <div class="shelf"></div>
-            <div class="shelf"></div>
-        </div>
-    </div>
+    <header>
+        Library
+    </header>
     <dialog>
         <h2>Book Information</h2>
         <form>
@@ -29,7 +25,7 @@
             </div>
             <div class="form-input">
                 <label for="pages">Pages:</label>
-                <input type="number" id="pages" name="pages" min="1" value="180">
+                <input type="number" id="pages" name="pages" min="1" placeholder="1">
             </div>
             <div class="form-input">
                 <input type="radio" id="read" name="read_status" value="read">
@@ -39,6 +35,10 @@
                 <label for = "read">Not Read</label>
             </div>
         </form>
+        <div class="dialog-buttons">
+            <button id="sumbit">Enter</button>
+            <button id="reset">Reset</button>
+        </div>
     </dialog>
     <button id="newBtn">New Book</button>
 </body>
