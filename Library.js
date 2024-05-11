@@ -14,6 +14,16 @@ function clearGrid() {
     gridContainer.innerHTML = "";
 }
 
+function getBookInfo() {
+    // get information from dialog box
+    title = document.getElementById("title").value;
+    author = document.getElementById("author").value;
+    pages = document. getElementById("pages").value;
+    read_status = document.querySelector("input[name='read_status']:checked").value;
+    
+    return(title, author, pages, read_status);
+}
+
 function displayBook(book) {
     // creates grid item for card
     gridItem = document.createElement('div');
@@ -41,12 +51,12 @@ function displayBook(book) {
     // read status
     cardReadStatus = document.createElement('div');
     cardReadStatus.className = "cardReadStatus";
-    cardReadStatus.innerHTML = "Author: " + book.read_status;
+    cardReadStatus.innerHTML = "Read Status: " + book.read_status;
     gridItem.appendChild(cardReadStatus);
 
 
 }
- 
+
 // buttons to open dialog box and events
 const dialog = document.querySelector('dialog');
 const showDialogBtn = document.querySelector('#newBtn');
@@ -61,18 +71,14 @@ showDialogBtn.addEventListener("click", () => {
 let bookInfo = document.getElementById("bookInfo");
 
 bookInfo.addEventListener("submit", e => {
-    // prevent submit event before grabbing info
+    // prevent submit event
+    // clear book display
     e.preventDefault();
-
     clearGrid();
 
-    // get information from dialog box
-    title = document.getElementById("title").value;
-    author = document.getElementById("author").value;
-    pages = document. getElementById("pages").value;
-    read_status = document.querySelector("input[name='read_status']:checked").value;
-    
+    // get book information from dialog box 
     // Create book,add to library, and display 
+    title, author, pages, read_status = getBookInfo();
     newBook = new Book(title, author, pages, read_status);
     addBookToLibrary(newBook);
     
@@ -80,5 +86,8 @@ bookInfo.addEventListener("submit", e => {
         displayBook(book);
     });
 
+    // clear form and close dialog
+    form = document.getElementById("bookInfo");
+    form.reset();
     dialog.close();
 });
