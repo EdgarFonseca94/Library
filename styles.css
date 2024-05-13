@@ -76,3 +76,7 @@ dialog > * {
     font-size: 20px;
     margin: 10px auto;
 }
+.changeStatus {
+    background-color: lightskyblue;
+    border-radius: 5px;
+}

@@ -4,7 +4,7 @@ function Book (title, author, pages, read_status) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.read_status = read_status;
+    this.read_status = Number(read_status);
 }
 
 function addBookToLibrary(newBook) {
@@ -20,11 +20,10 @@ function getBookInfo() {
     author = document.getElementById("author").value;
     pages = document. getElementById("pages").value;
     read_status = document.querySelector("input[name='read_status']:checked").value;
-    
     return(title, author, pages, read_status);
 }
 
-function displayBook(book) {
+function displayBook(book, index) {
     // creates grid item for card
     gridItem = document.createElement('div');
     gridItem.className= "grid-item";
@@ -51,10 +50,22 @@ function displayBook(book) {
     // read status
     cardReadStatus = document.createElement('div');
     cardReadStatus.className = "cardReadStatus";
-    cardReadStatus.innerHTML = "Read Status: " + book.read_status;
+    cardReadStatus.innerHTML = "Read Status: " + ((book.read_status) ? "Read" : "Not Read");
     gridItem.appendChild(cardReadStatus);
 
 
+    // create change read status
+    changeStatusBtn = document.createElement('button');
+    changeStatusBtn.className = "changeStatus";
+    changeStatusBtn.innerHTML = "Change Read Status";
+    changeStatusBtn.onclick = function () {
+        // switch value, expression ? iftrue : iffalse
+        // if 1 - > 0
+        // if 0 -> 1
+        myLibrary[index].read_status = myLibrary[index].read_status ? 0 : 1;
+        cardReadStatus.innerHTML = "Read Status: " + ((book.read_status) ? "Read" : "Not Read");
+    }
+    gridItem.appendChild(changeStatusBtn);
 }
 
 // buttons to open dialog box and events
@@ -82,8 +93,8 @@ bookInfo.addEventListener("submit", e => {
     newBook = new Book(title, author, pages, read_status);
     addBookToLibrary(newBook);
     
-    myLibrary.forEach((book) => {
-        displayBook(book);
+    myLibrary.forEach((book, index) => {
+        displayBook(book, index);
     });
 
     // clear form and close dialog
@@ -91,3 +102,6 @@ bookInfo.addEventListener("submit", e => {
     form.reset();
     dialog.close();
 });
+
+// change read status
+
