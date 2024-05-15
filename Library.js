@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 
 function Book (title, author, pages, read_status) {
     this.title = title;
@@ -27,6 +27,7 @@ function displayBook(book, index) {
     // creates grid item for card
     gridItem = document.createElement('div');
     gridItem.className= "grid-item";
+    gridItem.setAttribute("book-num", index);
     gridContainer.appendChild(gridItem);
 
     // title
@@ -50,6 +51,7 @@ function displayBook(book, index) {
     // read status
     cardReadStatus = document.createElement('div');
     cardReadStatus.className = "cardReadStatus";
+    cardReadStatus.setAttribute("data-read-num", index);
     cardReadStatus.innerHTML = "Read Status: " + ((book.read_status) ? "Read" : "Not Read");
     gridItem.appendChild(cardReadStatus);
 
@@ -63,9 +65,21 @@ function displayBook(book, index) {
         // if 1 - > 0
         // if 0 -> 1
         myLibrary[index].read_status = myLibrary[index].read_status ? 0 : 1;
-        cardReadStatus.innerHTML = "Read Status: " + ((book.read_status) ? "Read" : "Not Read");
+        document.querySelector(`[data-read-num ="${index}"]`).innerHTML = "Read Status: " + ((book.read_status) ? "Read" : "Not Read");
     }
     gridItem.appendChild(changeStatusBtn);
+
+    // create remove button
+    removeBtn = document.createElement('button');
+    removeBtn.className = "removeBtn";
+    removeBtn.innerHTML = "Remove";
+    removeBtn.onclick = function () {
+        // move book from array
+        myLibrary.splice(index, 1);
+        
+        
+    }
+    gridItem.appendChild(removeBtn);
 }
 
 // buttons to open dialog box and events
