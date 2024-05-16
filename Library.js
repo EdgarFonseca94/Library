@@ -22,7 +22,12 @@ function getBookInfo() {
     read_status = document.querySelector("input[name='read_status']:checked").value;
     return(title, author, pages, read_status);
 }
-
+function reIndexBooks() {
+    // changes values of divs/books in their respective data-attributes
+    document.querySelectorAll(`[book-num]`).forEach((item, i=0) => {
+        item.setAttribute('book-num', `${i}`);
+    });
+}
 function displayBook(book, index) {
     // creates grid item for card
     gridItem = document.createElement('div');
@@ -55,6 +60,10 @@ function displayBook(book, index) {
     cardReadStatus.innerHTML = "Read Status: " + ((book.read_status) ? "Read" : "Not Read");
     gridItem.appendChild(cardReadStatus);
 
+    // Button flex container
+    buttonContainer = document.createElement('div');
+    buttonContainer.className = "button-container";
+    gridItem.appendChild(buttonContainer);
 
     // create change read status
     changeStatusBtn = document.createElement('button');
@@ -64,10 +73,12 @@ function displayBook(book, index) {
         // switch value, expression ? iftrue : iffalse
         // if 1 - > 0
         // if 0 -> 1
-        myLibrary[index].read_status = myLibrary[index].read_status ? 0 : 1;
-        document.querySelector(`[data-read-num ="${index}"]`).innerHTML = "Read Status: " + ((book.read_status) ? "Read" : "Not Read");
+        // index for book location
+        let changeIndex = +this.closest(".grid-item").getAttribute("book-num")
+        myLibrary[changeIndex].read_status = myLibrary[changeIndex].read_status ? 0 : 1;
+        document.querySelector(`[data-read-num ="${changeIndex}"]`).innerHTML = "Read Status: " + ((book.read_status) ? "Read" : "Not Read");
     }
-    gridItem.appendChild(changeStatusBtn);
+    buttonContainer.appendChild(changeStatusBtn);
 
     // create remove button
     removeBtn = document.createElement('button');
@@ -75,11 +86,16 @@ function displayBook(book, index) {
     removeBtn.innerHTML = "Remove";
     removeBtn.onclick = function () {
         // move book from array
-        myLibrary.splice(index, 1);
+        // index for book
+        let rmvIndex = +this.closest(".grid-item").getAttribute("book-num");
+        myLibrary.splice(rmvIndex, 1);
+        let childRemove = document.querySelector(`[book-num="${rmvIndex}"`);
+        gridContainer.removeChild(childRemove);
         
-        
+        // update attribute nums to correct nums
+        reIndexBooks();
     }
-    gridItem.appendChild(removeBtn);
+    buttonContainer.appendChild(removeBtn);
 }
 
 // buttons to open dialog box and events
