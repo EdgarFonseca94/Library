@@ -17,14 +17,6 @@ header button {
     right: 20px;
     top: 10px;
 }
-.shelf {
-    background-color: #80461B;
-    height: 30%;
-}
-dialog {
-    width: 300px;
-    height: 300px;
-}
 #newBtn {
     background-color: lightskyblue;
     padding: 0;
@@ -35,12 +27,23 @@ dialog {
     border-radius: 5px;
     font-size: 20px;
 }
+
+/* styling dialog box and input */
+dialog {
+    width: 300px;
+    height: 300px;
+}
+dialog > * {
+    padding-left: 20px;    
+}
 ::backdrop {
     background-color: black;
     opacity: .3;
 }
-dialog > * {
-    padding-left: 20px;    
+/* styles for buttons in dialog box */
+.dialog-buttons {
+    display: flex;
+    gap: 10px;
 }
 .dialog-buttons > * {
     background-color: lightskyblue;
@@ -51,8 +54,28 @@ dialog > * {
     margin-top: 20px;
     border-radius: 5px;
 }
+#close {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 0px;
+    width: 20px;
+    color: grey;
+}
+/* styles for labels & inputs */
 .form-input {
     margin-top: 20px;
+    display: flex;
+}
+.form-input > label {
+    flex-basis: 20%;
+}
+.radio-input {
+    margin-top: 20px;
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 .grid-container {
     display: grid;
@@ -73,7 +96,6 @@ dialog > * {
     flex-direction: column;
 }
 .grid-item > * {
-    font-size: 20px;
     margin: 10px auto;
 }
 .changeStatus {

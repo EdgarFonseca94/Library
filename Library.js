@@ -13,7 +13,10 @@ function addBookToLibrary(newBook) {
 function clearGrid() {
     gridContainer.innerHTML = "";
 }
-
+function clearForm() {
+    form = document.getElementById("bookInfo");
+    form.reset();
+}
 function getBookInfo() {
     // get information from dialog box
     title = document.getElementById("title").value;
@@ -109,7 +112,10 @@ showDialogBtn.addEventListener("click", () => {
 });
 
 // form actions
-let bookInfo = document.getElementById("bookInfo");
+const bookInfo = document.getElementById("bookInfo");
+const resetBtn = document.getElementById("reset");
+const closeBtn = document.getElementById("close");
+
 
 bookInfo.addEventListener("submit", e => {
     // prevent submit event
@@ -128,10 +134,15 @@ bookInfo.addEventListener("submit", e => {
     });
 
     // clear form and close dialog
-    form = document.getElementById("bookInfo");
-    form.reset();
+    clearForm();
     dialog.close();
 });
 
-// change read status
+resetBtn.addEventListener('click', () => {
+    clearForm();
+});
 
+closeBtn.addEventListener('click', () => {
+    clearForm();
+    dialog.close();
+});
